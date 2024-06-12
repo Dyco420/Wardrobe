@@ -23,7 +23,8 @@ export default class KleerkastApp{
         }
     }
 
-    #initialiseerHTML() {
+    async #initialiseerHTML() {
+        await this.haalTestDataOp();
         this.#toonKledingCards();
     }
 
@@ -31,6 +32,7 @@ export default class KleerkastApp{
         console.log(this.#repository.huidigeKleerkast);
         let kledij = this.#repository.huidigeKleerkast.kledingstukken;
         let container = document.getElementById("kleding-container");
+        console.log(`kleding container: ${container}`);
 
         kledij.forEach(kledingstuk => {
             // Maak een nieuwe div aan voor de kaart
@@ -47,9 +49,10 @@ export default class KleerkastApp{
     
             // Voeg de afbeelding toe aan de content
             let img = document.createElement("img");
-            img.src = kledingstuk.afbeeldingen[0];
+            img.src = `img/kledingTest/${kledingstuk.afbeeldingen[0]}`;
             img.alt = "Kledingstuk image";
             content1.appendChild(img);
+            console.log(kledingstuk);
     
             // Voeg de naam van het kledingstuk toe aan de content
             let h3 = document.createElement("h3");
@@ -90,6 +93,8 @@ export default class KleerkastApp{
             // Voeg beide zijden van de kaart toe aan de kaart
             card.appendChild(face1);
             card.appendChild(face2);
+
+            //TODO card onclick => naar pagina over kledingstuk
     
             // Voeg de kaart toe aan de container
             container.appendChild(card);
@@ -115,11 +120,10 @@ export default class KleerkastApp{
                     item.kleur,
                     item.maat,
                     item.merk,
-                    testKleerkast,
                     item.afbeeldingen);
             });
     
-            this.#repository.voegTestKleerkastToe(testKleerkast);
+            this.#repository.voegKleerkastToe(testKleerkast);
         } catch (error) {
             console.error("Er is een fout opgetreden bij het ophalen van de testkledij:", error);
             return null;

@@ -2,18 +2,20 @@ import Kleerkast from "./Kleerkast.js";
 
 export default class KleerkastRepository {
     #kleerkasten = [];
-    #huidigeKleerkast;
 
-    constructor() {
-        //TODO
+    get kleerkasten() {
+        return this.#kleerkasten;
     }
 
     get huidigeKleerkast() {
-        return this.#huidigeKleerkast;
+        return this.#kleerkasten[0];
     }
 
     voegKleerkastToe(kast) {
         this.#kleerkasten.push(kast);
-        this.#huidigeKleerkast = kast;
+    }
+
+    getKleerkast(naam) {
+        return this.#kleerkasten.find(k => k.naam === naam);
     }
 }

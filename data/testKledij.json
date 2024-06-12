@@ -1,34 +1,110 @@
 [
-    {
-      "naam": "Shirt 1",
-      "type": "Shirt",
+  {
+      "naam": "Beige Cargobroek",
+      "type": "Broek",
+      "kleur": "Beige",
+      "maat": "L",
+      "merk": "FashionBrand",
+      "afbeeldingen": [
+          "broek_beige_cargobroek.jpg",
+          "topje_donkergroen_aztecTopje.jpg",
+          "tshirt_roze_effenShirt.jpg"
+      ]
+  },
+  {
+      "naam": "Blauwe Jeansbroek",
+      "type": "Broek",
       "kleur": "Blauw",
       "maat": "M",
-      "merk": "Example Brand",
-      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
-    },
-    {
-      "naam": "Broek 1",
-      "type": "Broek",
-      "kleur": "Zwart",
-      "maat": "L",
-      "merk": "Example Brand",
-      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
-    },
-    {
-      "naam": "Jurk 1",
+      "merk": "DenimCo",
+      "afbeeldingen": [
+          "broek_blauw_jeansbroek.jpg",
+          "wit_tshirt_test.jpg",
+          "jurk_rood_duitseJurk.jpg"
+      ]
+  },
+  {
+      "naam": "Geel T-Shirt",
+      "type": "T-Shirt",
+      "kleur": "Geel",
+      "maat": "S",
+      "merk": "CasualWear",
+      "afbeeldingen": [
+          "geel_tshirt_test.jpg",
+          "tshirt_paars_regenboog.jpg",
+          "zwart_tshirt_test.jpg"
+      ]
+  },
+  {
+      "naam": "Rode Jurk",
       "type": "Jurk",
       "kleur": "Rood",
-      "maat": "S",
-      "merk": "Example Brand",
-      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
-    },
-    {
-      "naam": "Trui 1",
-      "type": "Trui",
-      "kleur": "Groen",
+      "maat": "M",
+      "merk": "ElegantDress",
+      "afbeeldingen": [
+          "jurk_rood_duitseJurk.jpg",
+          "tshirt_paars_regenboog.jpg",
+          "tshirt_roze_effenShirt.jpg"
+      ]
+  },
+  {
+      "naam": "Groen Aztec Topje",
+      "type": "Topje",
+      "kleur": "Donkergroen",
+      "maat": "L",
+      "merk": "SummerVibes",
+      "afbeeldingen": [
+          "topje_donkergroen_aztecTopje.jpg",
+          "broek_blauw_jeansbroek.jpg",
+          "wit_tshirt_test.jpg"
+      ]
+  },
+  {
+      "naam": "Paarse Regenboog T-Shirt",
+      "type": "T-Shirt",
+      "kleur": "Paars",
       "maat": "XL",
-      "merk": "Example Brand",
-      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
-    }
-  ]
+      "merk": "ColorfulLife",
+      "afbeeldingen": [
+          "tshirt_paars_regenboog.jpg",
+          "broek_beige_cargobroek.jpg",
+          "tshirt_roze_effenShirt.jpg"
+      ]
+  },
+  {
+      "naam": "Roze Effen T-Shirt",
+      "type": "T-Shirt",
+      "kleur": "Roze",
+      "maat": "M",
+      "merk": "BrightFashion",
+      "afbeeldingen": [
+          "tshirt_roze_effenShirt.jpg",
+          "geel_tshirt_test.jpg",
+          "zwart_tshirt_test.jpg"
+      ]
+  },
+  {
+      "naam": "Wit Test T-Shirt",
+      "type": "T-Shirt",
+      "kleur": "Wit",
+      "maat": "S",
+      "merk": "PlainStyle",
+      "afbeeldingen": [
+          "wit_tshirt_test.jpg",
+          "jurk_rood_duitseJurk.jpg",
+          "tshirt_paars_regenboog.jpg"
+      ]
+  },
+  {
+      "naam": "Zwart Test T-Shirt",
+      "type": "T-Shirt",
+      "kleur": "Zwart",
+      "maat": "L",
+      "merk": "Monochrome",
+      "afbeeldingen": [
+          "zwart_tshirt_test.jpg",
+          "geel_tshirt_test.jpg",
+          "topje_donkergroen_aztecTopje.jpg"
+      ]
+  }
+]
