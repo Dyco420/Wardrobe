@@ -80,4 +80,7 @@ export default class Kledingstuk {
         }
     }
 
+    geefAfbeelding(index){
+        return this.#afbeeldingen[index];
+    }
 }

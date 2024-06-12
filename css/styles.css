@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+:root {
+    --background-color: #FFB96E;
+    --title-color: #D95454;
+    --accent-color: #B0E0E6;
+    --subtitle-color: #8F898B;
+
+    --select-background-color: #ffd09eb5;
+    --select-background-color-hover: #ffffff51;
+    --select-text-color: #333333;
+
+    --option-background-color: #F5F5F5; /* Lichte kleur voor opties */
+    --option-hover-color: #E0E0E0; /* Donkerdere kleur bij hover */
+
+    --button-background-color: var(--title-color);
+    --button-text-color: #f0e0d8;
+
+    --separator-color: #8F898B;
+
+    --card-face1-background: #ffffff;
+    --card-face2-background: #ed7676;
+}
+
+body {
+    margin: 0;
+    font-family: "DM Serif Text", serif;
+    background-color: var(--background-color);
+}
+
+/* Header tekst centreren */
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0; /* Boven- en ondermarge voor wat ruimte */
+    box-sizing: border-box; /* Inclusief padding bij de breedte */
+}
+
+/* Titels */
+.paginaTitel {
+    font-weight: bold;
+    margin: 0;
+    font-size: 4.5em;
+    color: var(--title-color);
+    border-radius: 20px;
+}
+
+.paginaSubTitel {
+    font-weight: 400;
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--subtitle-color);
+}
+
+.separator {
+    width: 80%; /* Brede lijn */
+    margin: 20px auto; /* Boven- en onderruimte */
+    border-bottom: 4px solid var(--separator-color); /* Dikte en kleur van de lijn */
+    opacity: 0.1; /* Subtielere uitstraling */
+    border-radius: 80px;
+}
+
+/* Kleerkast keuze lijst */
+.kleerkastKeuze {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.kleerkastKeuze label {
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--title-color);
+    margin-bottom: 10px;
+}
+
+.kleerkastKeuze select {
+    width: 220px;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px; /* Maakt de select box mooi rond */
+    background-color: var(--select-background-color);
+    color: var(--select-text-color);
+    margin-bottom: 10px;
+    box-shadow: 2px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Verwijdert het standaardpijltje */
+    -webkit-appearance: none; /* Verwijdert het standaardpijltje in WebKit browsers */
+    text-align: center; /* Centreert de tekst */
+    text-align-last: center; /* Centreert de tekst in moderne browsers */
+}
+
+.kleerkastKeuze select:hover {
+    box-shadow: 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--select-background-color-hover);
+}
+
+.kleerkastKeuze option {
+    background-color: var(--option-background-color);
+    color: var(--select-text-color);
+    text-align: center; /* Centreert de tekst in de opties */
+    padding: 10px;
+}
+
+/* Hover effect voor select */
+.kleerkastKeuze select:hover {
+    border-color: var(--title-color);
+}
+
+.kleerkastKeuze select option:hover {
+    background-color: var(--option-hover-color); /* Kleurverandering bij hover */
+}
+
+.kleerkastKeuze button {
+    font-weight: 550;
+    width: 175px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: var(--button-text-color);
+    background-color: var(--button-background-color);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.kleerkastKeuze button:hover {
+    background-color: #C94444; /* Donkerdere tint voor hover effect */
+}
+
+/* Voorbeeld kleerkast layout */
+.kleding-container {
+    width: 80%;
+    margin: 0 auto; /* Horizontaal centreren */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+
+.card {
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    position: relative;
+    transition: 0.4s;
+    z-index: 1;
+    transform-style: preserve-3d; /* Zorgt ervoor dat kind-elementen in 3D worden gerenderd */
+}
+
+.card .face1 img {
+    max-width: 100%;
+    max-height: 200px; /* Zorgt ervoor dat de afbeelding niet groter kan worden dan de kaart */
+    border-radius: 5px;
+}
+
+.card .face1 h3 {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: var(--title-color);
+}
+
+.card .face {
+    width: 200px;
+    height: 250px;
+    position: absolute;
+    backface-visibility: hidden; /* Verbergt de achterkant van de kaart in de niet-geanimeerde staat */
+    transition: transform 0.4s;
+}
+
+.card .face.face1 {
+    background: var(--card-face1-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.card .face.face2 {
+    background: var(--card-face2-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transform: rotateY(180deg); /* Zorgt ervoor dat de achterkant van de kaart wordt omgedraaid */
+}
+
+.card:hover .face.face1 {
+    transform: rotateY(-180deg); /* Omgekeerde draaiing voor de voorkant */
+}
+
+.card:hover .face.face2 {
+    transform: rotateY(0deg); /* Draaiing terug naar de originele positie voor de achterkant */
+}

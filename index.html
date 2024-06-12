@@ -3,26 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
     <title>My Wardrobe</title>
 </head>
 <body>
-    <header>
+    <header class="header-container">
         <h1 class="paginaTitel">My Wardrobe</h1>
         <p class="paginaSubTitel">by Dylan Coene</p>
     </header>
+    <div class="separator"></div>
     <main>
         <div class="kleerkastKeuze">
-
+            <label for="kleerkastSelect">Selecteer een kleerkast</label>
+            <select id="kleerkastSelect" name="kleerkasten">
+                <option value="kleerkast1">Kot</option>
+                <option value="kleerkast2">Thuis</option>
+                <option value="kleerkast3">Ardennen</option>
+            </select>
+            <button id="addKleerkastButton">Add Wardrobe</button>
         </div>
         <div class="kleerkast">
             <div class="filter">
                 <!-- kledij filteren -->
             </div>
             <div class="kleding-container">
-                <!-- Grid flex ding met kleding cards -->
+                <div class="card">
+                    <div class="face face1">
+                      <div class="content">
+                        <img src="img/kledingTest/geel_tshirt_test.jpg" alt="Shirt Image">
+                        <h3>Shirt van hele lange naam</h3>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <div class="content">
+                        <h3>Type: Shirt</h3>
+                        <p>Kleur: Blue</p>
+                        <p>Maat: M</p>
+                        <p>Merk: Example Brand</p>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="face face1">
+                      <div class="content">
+                        <img src="img/kledingTest/wit_tshirt_test.jpg" alt="Shirt Image">
+                        <h3>Shirt</h3>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <div class="content">
+                        <h3>Type: Shirt</h3>
+                        <p>Kleur: Blue</p>
+                        <p>Maat: M</p>
+                        <p>Merk: Example Brand</p>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="face face1">
+                      <div class="content">
+                        <img src="img/kledingTest/zwart_tshirt_test.jpg" alt="Shirt Image">
+                        <h3>Shirt</h3>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <div class="content">
+                        <h3>Type: Shirt</h3>
+                        <p>Kleur: Blue</p>
+                        <p>Maat: M</p>
+                        <p>Merk: Example Brand</p>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    <script type="module" src="js/index.js"></script>
 </body>
 </html>
