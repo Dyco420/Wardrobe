@@ -1,0 +1,34 @@
+[
+    {
+      "naam": "Shirt 1",
+      "type": "Shirt",
+      "kleur": "Blauw",
+      "maat": "M",
+      "merk": "Example Brand",
+      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
+    },
+    {
+      "naam": "Broek 1",
+      "type": "Broek",
+      "kleur": "Zwart",
+      "maat": "L",
+      "merk": "Example Brand",
+      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
+    },
+    {
+      "naam": "Jurk 1",
+      "type": "Jurk",
+      "kleur": "Rood",
+      "maat": "S",
+      "merk": "Example Brand",
+      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
+    },
+    {
+      "naam": "Trui 1",
+      "type": "Trui",
+      "kleur": "Groen",
+      "maat": "XL",
+      "merk": "Example Brand",
+      "afbeeldingen": ["img/kledingTest/geel_tshirt_test.jpg", "img/kledingTest/wit_tshirt_test.jpg", "img/kledingTest/zwart_tshirt_test.jpg"]
+    }
+  ]

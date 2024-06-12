@@ -3,14 +3,23 @@ import Kledingstuk from "./Kledingstuk.js";
 export default class Kleerkast {
     #naam;
     #locatie;
-    #kledingstukken;
+    #kledingstukken = [];
 
-    constructor(kledingstukken = []){
-        this.#kledingstukken = kledingstukken;
+    constructor(naam){
+        this.#naam = naam;
     }
 
-    voegKledingstukToe(stuk){
-        this.#kledingstukken.push(stuk);
+    voegKledingstukToe(naam, type, kleur, maat, merk, afbeeldingen = []){
+        const kledingstuk = new Kledingstuk(
+            naam,
+            type,
+            kleur,
+            maat,
+            merk,
+            this, // Verwijzing naar de huidige kleerkast
+            afbeeldingen
+        );
+        this.#kledingstukken.push(kledingstuk);
     }
 
     voegKledingstukkenToe(stukken){
@@ -20,7 +29,7 @@ export default class Kleerkast {
     }
 
     verwijderKledingstuk(stuk){
-        const index = this.#kledingstukken.indexOf(kleerkast);
+        const index = this.#kledingstukken.indexOf(stuk);
         if (index !== -1) {
             this.#kledingstukken.splice(index, 1);
         }
