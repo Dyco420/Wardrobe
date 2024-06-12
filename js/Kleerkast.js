@@ -5,20 +5,12 @@ export default class Kleerkast {
     #locatie;
     #kledingstukken = [];
 
-    constructor(naam){
+    constructor(naam, locatie){
         this.#naam = naam;
+        this.#locatie = locatie;
     }
 
-    voegKledingstukToe(naam, type, kleur, maat, merk, afbeeldingen = []){
-        const kledingstuk = new Kledingstuk(
-            naam,
-            type,
-            kleur,
-            maat,
-            merk,
-            this, // Verwijzing naar de huidige kleerkast
-            afbeeldingen
-        );
+    voegKledingstukToe(kledingstuk){
         this.#kledingstukken.push(kledingstuk);
     }
 
@@ -35,7 +27,23 @@ export default class Kleerkast {
         }
     }
 
+    get naam() {
+        return this.#naam;
+    }
+
     get kledingstukken() {
         return this.#kledingstukken;
+    }
+
+    get locatie() {
+        return this.#locatie;
+    }
+
+    set locatie(locatie) {
+        this.#locatie = locatie;
+    }
+    
+    setLocatie(straat, huisnummer, stad, postcode, land){
+        this.#locatie = `${straat} ${huisnummer}, ${postcode} ${stad}, ${land}`;
     }
 }

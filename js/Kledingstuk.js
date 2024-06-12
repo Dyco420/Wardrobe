@@ -81,6 +81,10 @@ export default class Kledingstuk {
     }
 
     geefAfbeelding(index){
-        return this.#afbeeldingen[index];
+        if (index < 0 || index >= this.#afbeeldingen.length) {
+            return "no_image_found.jpg";
+        } else {
+            return this.#afbeeldingen[index];
+        }
     }
 }

@@ -1,5 +1,6 @@
 import KleerkastRepository from "./KleerkastRepository.js";
 import Kleerkast from "./Kleerkast.js";
+import Kledingstuk from "./Kledingstuk.js";
 
 export default class KleerkastApp{
     #repository;
@@ -23,16 +24,168 @@ export default class KleerkastApp{
         }
     }
 
-    async #initialiseerHTML() {
-        await this.haalTestDataOp();
-        this.#toonKledingCards();
+    async #initialiseerData() {
+        try {
+            const kleerkastenData = localStorage.getItem('kleerkasten');
+    
+            if (!kleerkastenData) {
+                throw new Error("Geen data gevonden in localStorage");
+            }
+    
+            const kleerkastenString = JSON.parse(kleerkastenData);
+            const kleerkasten = JSON.parse(kleerkastenString);
+
+            this.#repository.kleerkasten = [];
+    
+            kleerkasten.forEach(kleerkastData => {
+                const kleerkast = new Kleerkast(kleerkastData.naam, kleerkastData);
+                kleerkastData.kledingstukken.forEach(kledingstukData => {
+                    kleerkast.voegKledingstukToe(
+                        kledingstukData.naam,
+                        kledingstukData.type,
+                        kledingstukData.kleur,
+                        kledingstukData.maat,
+                        kledingstukData.merk,
+                        kledingstukData.afbeeldingen
+                    );
+                });
+                this.#repository.voegKleerkastToe(kleerkast);
+            });
+        } catch (error) {
+            console.error("Er is een fout opgetreden bij het ophalen van de kleerkasten:", error);
+        }
     }
 
-    #toonKledingCards() {
-        console.log(this.#repository.huidigeKleerkast);
-        let kledij = this.#repository.huidigeKleerkast.kledingstukken;
+    async #initialiseerHTML() {
+        await this.#initialiseerData();
+        await this.haalTestDataOp();
+
+        this.#updateKleerkastLijst();
+
+        // Toon standaard alle kledingstukken
+        this.#toonAlleKledingstukken();
+
+        // Stel eventhandler in voor addKleerkast btn
+        this.#initAddWardrobeModal();
+        // Add kledingstuk
+        this.#initAddKledingstukModal();
+
+        console.log(this.#repository.kleerkasten);
+    }
+
+    #initAddWardrobeModal() {
+        const addWardrobeBtn = document.getElementById("btnAddKleerkast");
+        addWardrobeBtn.addEventListener("click", () => this.openModal("add-wardrobe-modal"));
+
+        const wardrobeForm = document.getElementById("wardrobe-form");
+        wardrobeForm.addEventListener("submit", (event) => this.handleWardrobeFormSubmit(event));
+
+        const closeButton = document.getElementById("addWardrobeClose");
+        closeButton.addEventListener("click", () => this.closeModal("add-wardrobe-modal"));
+    }
+
+    #initAddKledingstukModal() {
+        const addKledingBtn = document.getElementById("btnAddKledingstuk");
+        addKledingBtn.addEventListener("click", () => this.openModal("modalAddKledingstuk"));
+
+        const kledingForm = document.getElementById("formAddKledingstuk");
+        kledingForm.addEventListener("submit", (event) => this.handleKledingstukFormSubmit(event));
+
+        const closeButton = document.getElementById("addKledingstukClose");
+        closeButton.addEventListener("click", () => this.closeModal("modalAddKledingstuk"));
+    }
+
+    #updateKleerkastLijst() {
+        let lijst = document.getElementById("kleerkastSelect");
+
+        lijst.innerHTML = "<option>Selecteer een wardrobe</option>";
+        
+        // Voeg kleerkasten toe aan lijst
+        this.#repository.kleerkasten.forEach(kleerkast => {
+            let option = document.createElement("option");
+            option.setAttribute("value",kleerkast.naam);
+            option.innerText = kleerkast.naam;
+
+            lijst.appendChild(option);
+        })
+
+        lijst.onchange = () => {
+            if (lijst.value === "Selecteer een kleerkast") {
+                this.#toonAlleKledingstukken();
+            } else {
+                let gekozenKleerkast = this.#repository.kleerkasten.find(k => k.naam === lijst.value);
+                this.#toonKledingCards(gekozenKleerkast.kledingstukken);
+            }
+        }
+    }
+
+    openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "block";
+    }
+
+    closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "none";
+    }
+
+    handleWardrobeFormSubmit(event) {
+        event.preventDefault(); // Voorkom dat het formulier wordt verzonden
+
+        // Haal de ingevoerde waarden op
+        const name = document.getElementById("wardrobe-name").value;
+        const location = document.getElementById("wardrobe-location").value;
+
+        // Voeg hier logica toe om een nieuwe kleerkast toe te voegen met de ingevoerde gegevens
+        const nieuweKleerkast = new Kleerkast(name, location);
+        this.#repository.voegKleerkastToe(nieuweKleerkast);
+
+        console.log("Kleerkast toegevoegd:");
+        console.log(nieuweKleerkast);
+
+        // Sluit het modale venster
+        this.closeModal("add-wardrobe-modal");
+        // Refresh lijst
+        this.#updateKleerkastLijst()
+    }
+
+    handleKledingstukFormSubmit(event) {
+        event.preventDefault(); // Voorkom dat het formulier wordt verzonden
+    
+        // Haal de ingevoerde waarden op
+        const naam = document.getElementById("kledingstuk-naam").value;
+        const type = document.getElementById("kledingstuk-type").value;
+        const kleur = document.getElementById("kledingstuk-kleur").value;
+        const maat = document.getElementById("kledingstuk-maat").value;
+        const merk = document.getElementById("kledingstuk-merk").value;
+
+        //TODO afbeeldingen opslaan in data + strings ervan meegeven in afbeeldingen
+        const afbeeldingen = ["geel_tshirt_test.jpg"];
+
+        const nieuwKledingstuk = new Kledingstuk(naam, type, kleur, maat, merk, afbeeldingen);
+
+        this.#repository.voegKledingstukToeAanKleerkast(nieuwKledingstuk, this.#repository.kleerkasten.find(k => k.naam === document.getElementById("kleerkastSelect").value));
+
+        // Sluit het modale venster
+        this.closeModal("modalAddKledingstuk");
+
+        this.#toonAlleKledingstukken();
+    }
+
+    #toonAlleKledingstukken() {
+        let alleKledij = [];
+        this.#repository.kleerkasten.forEach(k => {
+            alleKledij.push(...k.kledingstukken);
+        })
+
+        this.#toonKledingCards(alleKledij);
+    }
+
+    #toonKledingCards(kledij) {
         let container = document.getElementById("kleding-container");
-        console.log(`kleding container: ${container}`);
+
+        // Leeg container
+        container.innerHTML = "";
 
         kledij.forEach(kledingstuk => {
             // Maak een nieuwe div aan voor de kaart
@@ -48,11 +201,12 @@ export default class KleerkastApp{
             content1.classList.add("content");
     
             // Voeg de afbeelding toe aan de content
+            console.log(kledingstuk);
+            let path = `img/kledingTest/` + kledingstuk.geefAfbeelding(0);
             let img = document.createElement("img");
-            img.src = `img/kledingTest/${kledingstuk.afbeeldingen[0]}`;
+            img.src = path;
             img.alt = "Kledingstuk image";
             content1.appendChild(img);
-            console.log(kledingstuk);
     
             // Voeg de naam van het kledingstuk toe aan de content
             let h3 = document.createElement("h3");
@@ -101,6 +255,7 @@ export default class KleerkastApp{
         });
     }
 
+    // Unused voorlopig
     async haalTestDataOp() {
         try {
             const response = await fetch("./data/testKledij.json");
@@ -115,12 +270,13 @@ export default class KleerkastApp{
             const testKleerkast = new Kleerkast("Test Kleerkast");
     
             data.forEach((item) => {
-                testKleerkast.voegKledingstukToe(item.naam,
+                testKleerkast.voegKledingstukToe(new Kledingstuk(item.naam,
                     item.type,
                     item.kleur,
                     item.maat,
                     item.merk,
-                    item.afbeeldingen);
+                    testKleerkast,
+                    item.afbeeldingen));
             });
     
             this.#repository.voegKleerkastToe(testKleerkast);
